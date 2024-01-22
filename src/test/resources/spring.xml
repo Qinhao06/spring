@@ -2,31 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	         http://www.springframework.org/schema/beans/spring-beans.xsd">
+	         http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:context="http://www.springframework.org/schema/c">
 
-    <bean id="husband" class="qh.springframework.bean.Husband">
-        <property name="wife" ref="wife"/>
-    </bean>
+<!--    <bean id="husband" class="qh.springframework.bean.Husband">-->
+<!--        <property name="wifiName" value="你猜"/>-->
+<!--        <property name="marriageDate" value="2221-08-08"/>-->
+<!--        <property name="age" value="22"/>-->
+<!--    </bean>-->
 
-    <bean id="wife" class="qh.springframework.bean.Wife">
-        <property name="husband" ref="husband"/>
-        <property name="mother" ref="husbandMother"/>
-    </bean>
-
-    <bean id="husbandMother" class="qh.springframework.bean.HusbandMother"/>
-
-    <!-- AOP 配置，验证三级缓存 -->
-    <bean class="qh.springframework.aop.proxy.realize.DefaultAdvisorAutoProxyCreator"/>
-
-    <bean id="beforeAdvice" class="qh.springframework.bean.SpouseAdvice"/>
-
-    <bean id="methodInterceptor" class="qh.springframework.aop.advice.realize.MethodBeforeAdviceInterceptor">
-        <property name="advice" ref="beforeAdvice"/>
-    </bean>
-
-    <bean id="pointcutAdvisor" class="qh.springframework.aop.advice.realize.AspectJExpressionPointcutAdvisor">
-        <property name="expression" value="execution(* qh.springframework.bean.Wife.*(..))"/>
-        <property name="advice" ref="methodInterceptor"/>
-    </bean>
+    <context:component-scan base-package="qh.springframework.bean"/>
 
 </beans>

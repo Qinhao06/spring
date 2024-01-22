@@ -1,8 +1,8 @@
 package qh.springframework.aop.proxy.core;
 
-import qh.springframework.beans.factory.bean.core.BeanPostProcessor;
-import qh.springframework.beans.factory.bean.core.BeansException;
-import qh.springframework.beans.factory.bean.core.PropertyValues;
+import qh.springframework.factory.bean.core.BeanPostProcessor;
+import qh.springframework.factory.bean.core.BeansException;
+import qh.springframework.factory.bean.core.PropertyValues;
 
 public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 

@@ -1,10 +1,12 @@
 package qh.springframework.context.realize.abstractrealize;
 
-import qh.springframework.beans.core.io.DefaultResourceLoader;
-import qh.springframework.beans.factory.bean.core.BeanFactoryPostProcessor;
-import qh.springframework.beans.factory.bean.core.BeanPostProcessor;
-import qh.springframework.beans.factory.bean.core.BeansException;
-import qh.springframework.beans.factory.bean.core.ConfigurableListableBeanFactory;
+import qh.springframework.factory.convert.core.ConversionService;
+import qh.springframework.factory.convert.realize.DefaultConversionService;
+import qh.springframework.factory.io.DefaultResourceLoader;
+import qh.springframework.factory.bean.core.BeanFactoryPostProcessor;
+import qh.springframework.factory.bean.core.BeanPostProcessor;
+import qh.springframework.factory.bean.core.BeansException;
+import qh.springframework.factory.bean.core.ConfigurableListableBeanFactory;
 import qh.springframework.context.core.ConfigurableApplicationContext;
 import qh.springframework.context.event.core.ApplicationEvent;
 import qh.springframework.context.event.core.ApplicationEventMulticaster;
@@ -42,26 +44,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
         registerListeners();
 
-        beanFactory.preInstantiate();
+        finishBeanFactoryInitialization(beanFactory);
 
         finishRefresh();
 
     }
 
-
-
-    @Override
-    public void registerShutdownHook() {
-        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
-    }
-
-    @Override
-    public void close() {
-
-        publishEvent(new ContextCloseEvent(this));
-
-        getBeanFactory().destroySingletons();
-    }
 
     protected abstract void refreshBeanFactory() throws BeansException;
 
@@ -112,6 +100,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     }
 
     @Override
+    public boolean containsBean(String beanName) {
+        return getBeanFactory().containsBean(beanName);
+    }
+
+    @Override
     public String[] getBeanDefinitionNames() {
         return getBeanFactory().getBeanDefinitionNames();
     }
@@ -137,7 +130,37 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         applicationEventMulticaster.multicastEvent(event);
     }
 
+    @Override
+    public void registerShutdownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+    }
+
+    @Override
+    public void close() {
+
+        publishEvent(new ContextCloseEvent(this));
+
+        getBeanFactory().destroySingletons();
+    }
+
     private void finishRefresh(){
         publishEvent(new ContextRefreshedEvent(this));
     }
+
+    protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
+        if (beanFactory.containsBean("conversionService")) {
+            Object conversionService = beanFactory.getBean("conversionService");
+            if (conversionService instanceof ConversionService) {
+                beanFactory.setConversionService((ConversionService) conversionService);
+            }
+        }else {
+            beanFactory.setConversionService(new DefaultConversionService());
+        }
+
+        beanFactory.preInstantiate();
+    }
+
+
+
+
 }

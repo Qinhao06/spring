@@ -1,6 +1,6 @@
 package qh.springframework.context.core;
 
-import qh.springframework.beans.factory.bean.core.BeansException;
+import qh.springframework.factory.bean.core.BeansException;
 
 public interface ConfigurableApplicationContext extends ApplicationContext {
 

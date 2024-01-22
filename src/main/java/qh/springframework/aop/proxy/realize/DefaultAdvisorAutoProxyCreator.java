@@ -9,11 +9,11 @@ import qh.springframework.aop.advice.core.TargetSource;
 import qh.springframework.aop.advice.realize.AspectJExpressionPointcutAdvisor;
 import qh.springframework.aop.proxy.core.ClassFilter;
 import qh.springframework.aop.proxy.core.InstantiationAwareBeanPostProcessor;
-import qh.springframework.beans.factory.bean.core.BeanFactory;
-import qh.springframework.beans.factory.bean.core.BeanFactoryAware;
-import qh.springframework.beans.factory.bean.core.BeansException;
-import qh.springframework.beans.factory.bean.core.PropertyValues;
-import qh.springframework.beans.factory.bean.realize.DefaultListableBeanFactory;
+import qh.springframework.factory.bean.core.BeanFactory;
+import qh.springframework.factory.bean.core.BeanFactoryAware;
+import qh.springframework.factory.bean.core.BeansException;
+import qh.springframework.factory.bean.core.PropertyValues;
+import qh.springframework.factory.bean.realize.DefaultListableBeanFactory;
 
 import java.util.Collection;
 import java.util.Collections;

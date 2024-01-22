@@ -1,7 +1,7 @@
 package qh.springframework.context.realize.abstractrealize;
 
-import qh.springframework.beans.factory.bean.realize.DefaultListableBeanFactory;
-import qh.springframework.beans.factory.bean.realize.XmlBeanDefinitionReader;
+import qh.springframework.factory.bean.realize.DefaultListableBeanFactory;
+import qh.springframework.factory.bean.realize.XmlBeanDefinitionReader;
 
 public abstract class AbstractXmlApplicationContext extends AbstractRefreshableApplicationContext{
 
