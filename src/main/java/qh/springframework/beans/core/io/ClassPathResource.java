@@ -2,7 +2,7 @@ package qh.springframework.beans.core.io;
 
 import cn.hutool.core.lang.Assert;
 
-import qh.springframework.beans.utils.ClassUtils;
+import qh.springframework.utils.ClassUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package qh.springframework.bean;
 
-import qh.springframework.aop.core.MethodBeforeAdvice;
+import qh.springframework.aop.advice.core.MethodBeforeAdvice;
 
 import java.lang.reflect.Method;
 

@@ -1,6 +1,6 @@
 package qh.springframework.context.core;
 
-import qh.springframework.common.Aware;
+import qh.springframework.beans.factory.bean.core.Aware;
 
 public interface ApplicationContextAware extends Aware {
 
